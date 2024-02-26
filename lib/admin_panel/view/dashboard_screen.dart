@@ -44,7 +44,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Consumer<AdminController>(
               builder: (context, controller, child) => Expanded(
                   child: SizedBox(
-                      child:controller.isLoading?Center(child: CircularProgressIndicator()): ListView.builder(
+                      child:
+                      // controller.isLoading?Center(child: CircularProgressIndicator()): 
+                      ListView.builder(
                 itemCount: controller.products.length,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {

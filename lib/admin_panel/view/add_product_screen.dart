@@ -26,20 +26,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
     super.initState();
   }
 
+@override
+  void dispose() {
+    // TODO: implement dispose
+     Provider.of<AdminController>(context, listen: false).clear();
+    super.dispose();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        final adminController =
-            Provider.of<AdminController>(context, listen: false);
-
-        // Clear the image when leaving the screen
-        adminController.clear();
-
-        // Allow the screen to be popped
-        return true;
-      },
-      child: Scaffold(
+    return  Scaffold(
         appBar: AppBar(
           title: Text(
             "List new Product",
@@ -309,7 +307,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             ],
           ),
         ),
-      ),
-    );
+      );
+    
   }
 }

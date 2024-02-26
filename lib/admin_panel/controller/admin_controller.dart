@@ -144,6 +144,51 @@ class AdminController extends ChangeNotifier {
     }
   }
 
+
+   Future<bool> editProduct(
+      {String? productName, String? price, String? description,String? stock,String? imgPath,String? id,String? category}) async {
+        String? imgUrl="";
+    try {
+      isAddingProduct = true;
+      notifyListeners();
+      final uid =const Uuid().v4();
+      if(image!=null){
+ final ref = FirebaseStorage.instance
+          .ref()
+          .child('productImage')
+          .child("${uid}jpg");
+      UploadTask uploadTask = ref.putFile(image);
+      final snapshot = await uploadTask.whenComplete(() {});
+       imgUrl = await snapshot.ref.getDownloadURL();
+      }else{
+        imgUrl=imgPath;
+      }
+     
+      
+
+      FirebaseFirestore.instance.collection("products").doc(id).update({
+        "id":id,
+        "productName": productName,
+        "price": price,
+        "description": description,
+        "category": category,
+        "imageUrl": imgUrl,
+        "size": selectedSizes,
+        "colors": selectedColors,
+        "stock":stock
+      });
+      isAddingProduct = false;
+      notifyListeners();
+      clear();
+      return true;
+    } catch (e) {
+      log(e.toString());
+      isAddingProduct = false;
+      notifyListeners();
+      return false;
+    }
+  }
+
   
 
  

@@ -155,9 +155,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   // clearIcon: true,
                   // controller: _controller,
                   hint: "select colors",
-                selectedOptions: List.generate(widget.product.colors!.length, (index) =>
-               ValueItem(label:widget.product.colors![index].toString(),value: null)
-                ),
+              //   selectedOptions: List.generate(widget.product.colors!.length, (index) =>
+              //  ValueItem(label:widget.product.colors![index].toString(),value: null)
+              //   ),
                   onOptionSelected: (options) {
                     options.forEach((element) {
                       print(" is ${element.label}");
@@ -192,9 +192,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   // clearIcon: true,
                   // controller: _controller,
                   hint: "select Size",
-                  selectedOptions: List.generate(widget.product.size!.length, (index) => 
-                  ValueItem(label: widget.product.size![index], value: null)
-                  ),
+                  // selectedOptions: List.generate(widget.product.size!.length, (index) => 
+                  // ValueItem(label: widget.product.size![index], value: null)
+                  // ),
                   onOptionSelected: (
                     options,
                   ) {
@@ -235,18 +235,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     width: 250,
                     decoration: BoxDecoration(
                         border: Border.all(color: const Color(0xffD6D6D6))),
-                    child: widget.product.imageUrl !=""
+                    child: controller.image ==null
                         ? Image.network(
                             widget.product.imageUrl,
                             fit: BoxFit.fill,
                           )
-                        : Center(
-                            child: Text(
-                            "Add image",
-                            style: GoogleFonts.ptSans(
-                                fontSize: 14,
-                                color: Colors.black.withOpacity(0.5)),
-                          )),
+                        : Image.file(controller.image,fit: BoxFit.fill,),
                   ),
                 ),
               ),
@@ -257,13 +251,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 onPressed: () async {
                   bool success =
                       await Provider.of<AdminController>(context, listen: false)
-                          .addProductToFirebase(productNameCntrl.text,
-                              priceCntrl.text, productDescriptionCntrl.text,stockCntrl.text);
+                          .editProduct(productName: productNameCntrl.text,
+                          description: productDescriptionCntrl.text,id:widget.product.id,
+                          price: priceCntrl.text,stock:stockCntrl.text,imgPath: widget.product.imageUrl,
+                          category: widget.product.category);
                   if (success) {
                     // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
                         // ignore: prefer_const_constructors
-                        SnackBar(content: Text("Added successfully")));
+                        SnackBar(content: Text("Updated successfully")));
                     // ignore: use_build_context_synchronously
                     Navigator.pushReplacement(
                         context,
