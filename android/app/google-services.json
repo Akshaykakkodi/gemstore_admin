@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1069341183203",
+    "project_id": "gemstore-18325",
+    "storage_bucket": "gemstore-18325.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069341183203:android:e0243890d8232f4c8f49d6",
+        "android_client_info": {
+          "package_name": "com.example.gemstore_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_jTUlwVcgM0f4OJW-Al08E38u8JbreZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
